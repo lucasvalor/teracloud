@@ -4,9 +4,15 @@ variable "region" {
 }
 
 variable "ec2_type" {
-  default = "t2.micro"
+  description = "Define the machine type"
+  default     = "t2.micro"
 }
 
 variable "ami" {
-  default = "ami-0de53d8956e8dcf80"
+  description = "Specify the image to use"
+  default     = "ami-0de53d8956e8dcf80"
+}
+
+variable "public_key" {
+  description = "The public key to SSH EC2 instance"
 }

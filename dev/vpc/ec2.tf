@@ -1,7 +1,7 @@
 resource "aws_instance" "MyEC2Instance-1" {
   ami             = "${var.ami}"
   instance_type   = "${var.ec2_type}"
-  key_name        = "EC2-us-east-1"
+  key_name        = "${aws_key_pair.EC2_key_pair.key_name}"
   security_groups = ["${aws_security_group.allow_ssh.name}"]
 
   tags {
@@ -26,4 +26,9 @@ resource "aws_security_group" "allow_ssh" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
+
+resource "aws_key_pair" "EC2_key_pair" {
+  key_name   = "EC2-Key"
+  public_key = "${var.public_key}"
 }
