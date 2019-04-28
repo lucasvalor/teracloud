@@ -8,8 +8,8 @@ data "aws_ami" "latest_ubuntu" {
   }
 
   filter {
-      name   = "virtualization-type"
-      values = ["hvm"]
+    name   = "virtualization-type"
+    values = ["hvm"]
   }
 }
 
@@ -49,5 +49,9 @@ resource "aws_security_group" "allow_ssh" {
 
 resource "aws_key_pair" "EC2_key_pair" {
   key_name   = "EC2-Key"
-  public_key = "${var.public_key}"
+  public_key = "${var.public_key}" # Defined in terraform.tfvars. File not in repository
+}
+
+output "ec2-public-ip" {
+  value = "${aws_instance.MyEC2Instance-1.public_ip}"
 }
